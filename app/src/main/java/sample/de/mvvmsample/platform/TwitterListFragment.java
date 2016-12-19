@@ -1,4 +1,4 @@
-package sample.de.mvvmsample.twitter;
+package sample.de.mvvmsample.platform;
 
 import android.app.Fragment;
 import android.databinding.DataBindingUtil;
@@ -14,6 +14,8 @@ import org.parceler.Parcels;
 import sample.de.mvvmsample.BR;
 import sample.de.mvvmsample.R;
 import sample.de.mvvmsample.databinding.TwitterFragmentBinding;
+import sample.de.mvvmsample.viewmodel.TwitterListViewModel;
+import sample.de.mvvmsample.service.TwitterService;
 
 /**
  * Created by darek on 18.12.16.

@@ -1,4 +1,4 @@
-package sample.de.mvvmsample.twitter;
+package sample.de.mvvmsample.platform;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -12,6 +12,8 @@ import java.util.List;
 import sample.de.mvvmsample.BR;
 import sample.de.mvvmsample.R;
 import sample.de.mvvmsample.databinding.TwitterRowBinding;
+import sample.de.mvvmsample.model.Twit;
+import sample.de.mvvmsample.viewmodel.TwitterRowViewModel;
 
 /**
  * Created by dkalinowski on 23.11.16.
@@ -52,8 +54,6 @@ public class TwitterListAdapter extends RecyclerView.Adapter<TwitterListAdapter.
     public int getItemCount() {
         return twitterRows.size();
     }
-
-
 
 
     public static class TwitterRowViewHolder extends RecyclerView.ViewHolder {

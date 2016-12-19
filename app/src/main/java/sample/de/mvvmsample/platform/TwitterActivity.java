@@ -1,4 +1,4 @@
-package sample.de.mvvmsample.twitter;
+package sample.de.mvvmsample.platform;
 
 import android.app.Activity;
 import android.os.Bundle;

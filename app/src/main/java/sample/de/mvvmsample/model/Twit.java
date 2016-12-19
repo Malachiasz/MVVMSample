@@ -1,4 +1,4 @@
-package sample.de.mvvmsample.twitter;
+package sample.de.mvvmsample.model;
 
 import android.net.Uri;
 
@@ -19,10 +19,11 @@ public class Twit {
     public Twit() {
     }
 
-    public Twit(String content, String title, String author) {
+    public Twit(String title, String content, String author, Uri uri) {
         this.content = content;
         this.title = title;
         this.author = author;
+        this.uri = uri;
     }
 
     public String getAuthor() {
@@ -38,6 +39,6 @@ public class Twit {
     }
 
     public Uri getUri() {
-        return Uri.parse("http://lorempixel.com/400/200/");
+        return uri;
     }
 }

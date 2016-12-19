@@ -1,4 +1,4 @@
-package sample.de.mvvmsample.twitter;
+package sample.de.mvvmsample.viewmodel;
 
 import android.app.Activity;
 import android.databinding.BaseObservable;
@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Locale;
 
 import sample.de.mvvmsample.R;
+import sample.de.mvvmsample.model.Twit;
+import sample.de.mvvmsample.platform.TwitterListAdapter;
+import sample.de.mvvmsample.service.TwitterService;
 
 /**
  * Created by darek on 18.12.16.
@@ -75,7 +78,7 @@ public class TwitterListViewModel extends BaseObservable implements TwitterServi
         isLoading.set(false);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.GERMANY);
-        lastSynced.set("Synced: " + dateFormat.format(new Date()));
+        lastSynced.set("Synced: " + dateFormat.format(getDate()));
     }
 
 
@@ -99,5 +102,10 @@ public class TwitterListViewModel extends BaseObservable implements TwitterServi
         } else {
             throw new IllegalArgumentException("RecyclerView.Adapter is not TwitterListAdapter");
         }
+    }
+
+    //TODO: inject with Dagger
+    Date getDate(){
+        return new Date();
     }
 }
