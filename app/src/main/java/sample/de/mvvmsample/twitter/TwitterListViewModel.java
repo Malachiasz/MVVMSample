@@ -2,8 +2,12 @@ package sample.de.mvvmsample.twitter;
 
 import android.app.Activity;
 import android.databinding.BaseObservable;
+import android.databinding.BindingAdapter;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -11,7 +15,6 @@ import org.parceler.Parcel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -27,7 +30,7 @@ public class TwitterListViewModel extends BaseObservable implements TwitterServi
 
     private ObservableBoolean isLoading = new ObservableBoolean();
     private ObservableField<String> lastSynced = new ObservableField<>();
-    private List<Twit> twits = new ArrayList<>();
+    private ObservableList<Twit> twits = new ObservableArrayList<>();
 
     private TwitterService twitterService;
     private Activity activity;
@@ -61,14 +64,20 @@ public class TwitterListViewModel extends BaseObservable implements TwitterServi
         return lastSynced;
     }
 
+    public ObservableList<Twit> getTwits() {
+        return twits;
+    }
+
     @Override
     public void onTwitsLoaded(List<Twit> twits) {
-        this.twits = twits;
+        this.twits.clear();
+        this.twits.addAll(twits);
         isLoading.set(false);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.GERMANY);
         lastSynced.set("Synced: " + dateFormat.format(new Date()));
     }
+
 
     @Override
     public void onClick(View v) {
@@ -79,6 +88,16 @@ public class TwitterListViewModel extends BaseObservable implements TwitterServi
             default:
                 Log.w("loadTwits", "Not supported element clicked");
                 break;
+        }
+    }
+
+    @BindingAdapter("app:items")
+    public static void setItems(RecyclerView view, List<Twit> items) {
+        RecyclerView.Adapter<?> adapter = view.getAdapter();
+        if (adapter instanceof TwitterListAdapter) {
+            ((TwitterListAdapter) adapter).updateList(items);
+        } else {
+            throw new IllegalArgumentException("RecyclerView.Adapter is not TwitterListAdapter");
         }
     }
 }

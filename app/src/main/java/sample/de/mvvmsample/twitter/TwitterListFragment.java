@@ -11,11 +11,8 @@ import android.view.ViewGroup;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
-
 import sample.de.mvvmsample.BR;
 import sample.de.mvvmsample.R;
-import sample.de.mvvmsample.SampleModel;
 import sample.de.mvvmsample.databinding.TwitterFragmentBinding;
 
 /**
@@ -58,7 +55,7 @@ public class TwitterListFragment extends Fragment{
     }
 
     private void setAdapter(TwitterFragmentBinding binding) {
-        TwitterListAdapter twitterListAdapter = new TwitterListAdapter(new ArrayList<SampleModel>(0), getActivity());
+        TwitterListAdapter twitterListAdapter = new TwitterListAdapter(getActivity());
         binding.tvTwitterList.setAdapter(twitterListAdapter);
     }
 

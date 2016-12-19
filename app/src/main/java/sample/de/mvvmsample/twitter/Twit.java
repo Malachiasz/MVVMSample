@@ -1,5 +1,7 @@
 package sample.de.mvvmsample.twitter;
 
+import android.net.Uri;
+
 import org.parceler.Parcel;
 
 /**
@@ -12,6 +14,7 @@ public class Twit {
     private String content;
     private String title;
     private String author;
+    private Uri uri;
 
     public Twit() {
     }
@@ -32,5 +35,9 @@ public class Twit {
 
     public String getTitle() {
         return title;
+    }
+
+    public Uri getUri() {
+        return Uri.parse("http://lorempixel.com/400/200/");
     }
 }
