@@ -14,6 +14,7 @@ import sample.de.mvvmsample.databinding.SampleRowBinding;
 public class SampleRowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private SampleRowBinding binding;
+    private int id;
 
     public SampleRowHolder(SampleRowBinding binding) {
         super(binding.getRoot());
@@ -24,10 +25,15 @@ public class SampleRowHolder extends RecyclerView.ViewHolder implements View.OnC
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Clicked a button", Toast.LENGTH_LONG).show();
+        Toast.makeText(view.getContext(), "Clicked a button: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
     }
 
     public SampleRowBinding getBinding() {
         return binding;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+
     }
 }

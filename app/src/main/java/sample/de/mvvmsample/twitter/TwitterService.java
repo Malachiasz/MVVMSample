@@ -13,12 +13,12 @@ import java.util.Random;
 
 public class TwitterService {
 
-    public void requestTwits(final Callback<List<Twit>> twitsCallback) {
+    public void requestTwits(final TwitsLoader twitsLoader) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 List<Twit> twits = getTwits();
-                twitsCallback.callback(twits);
+                twitsLoader.onTwitsLoaded(twits);
             }
         }).start();
 
@@ -49,7 +49,7 @@ public class TwitterService {
         return sb.toString();
     }
 
-    public interface Callback<T> {
-        public void callback(T t);
+    public interface TwitsLoader {
+        void onTwitsLoaded(List<Twit> twits);
     }
 }

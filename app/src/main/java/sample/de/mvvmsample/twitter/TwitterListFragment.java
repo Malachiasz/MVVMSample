@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
+import sample.de.mvvmsample.BR;
 import sample.de.mvvmsample.R;
 import sample.de.mvvmsample.SampleModel;
 import sample.de.mvvmsample.databinding.TwitterFragmentBinding;
@@ -25,13 +28,23 @@ public class TwitterListFragment extends Fragment{
         return new TwitterListFragment();
     }
 
+    private static final String VIEW_MODEL_INSTANCE_STATE = "VIEW_MODEL_INSTANCE_STATE";
+    private TwitterListViewModel twitterListViewModel = new TwitterListViewModel();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         TwitterFragmentBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.twitter_fragment, container, false);
-        View view = binding.getRoot();
 
+        if (savedInstanceState != null) {
+            twitterListViewModel = Parcels.unwrap(savedInstanceState.getParcelable(VIEW_MODEL_INSTANCE_STATE));
+        }
+        twitterListViewModel.onAttach(getActivity());
+        twitterListViewModel.setTwitterService(new TwitterService());
+
+        View view = binding.getRoot();
+        binding.setVariable(BR.viewModel, twitterListViewModel);
         setAdapter(binding);
         setLayoutManager(binding);
 
@@ -47,5 +60,17 @@ public class TwitterListFragment extends Fragment{
     private void setAdapter(TwitterFragmentBinding binding) {
         TwitterListAdapter twitterListAdapter = new TwitterListAdapter(new ArrayList<SampleModel>(0), getActivity());
         binding.tvTwitterList.setAdapter(twitterListAdapter);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(VIEW_MODEL_INSTANCE_STATE, Parcels.wrap(twitterListViewModel));
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDetach() {
+        twitterListViewModel.onDetach();
+        super.onDetach();
     }
 }

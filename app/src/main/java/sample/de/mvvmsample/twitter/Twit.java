@@ -1,14 +1,20 @@
 package sample.de.mvvmsample.twitter;
 
+import org.parceler.Parcel;
+
 /**
  * Created by darek on 18.12.16.
  */
 
+@Parcel
 public class Twit {
 
-    private final String content;
-    private final String title;
-    private final String author;
+    private String content;
+    private String title;
+    private String author;
+
+    public Twit() {
+    }
 
     public Twit(String content, String title, String author) {
         this.content = content;

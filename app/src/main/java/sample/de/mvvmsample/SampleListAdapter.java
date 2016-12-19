@@ -34,7 +34,8 @@ public class SampleListAdapter extends RecyclerView.Adapter<SampleRowHolder> {
     @Override
     public void onBindViewHolder(SampleRowHolder holder, int position) {
         SampleModel sampleModel = sampleModelList.get(position);
-        holder.getBinding().setVariable(BR.sampleModel, sampleModel);
+        holder.setId(position);
+        holder.getBinding().setVariable(sample.de.mvvmsample.BR.sampleModel, sampleModel);
         holder.getBinding().executePendingBindings();
     }
 
